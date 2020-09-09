@@ -3,7 +3,11 @@ class AssetsController < ApplicationController
 
   # GET /assets
   def index
-    @assets = Asset.all
+    @assets = if current_user.present?
+      Asset.all.where.not(id: current_user.assets.map(&:id))
+    else
+      Asset.all
+    end
 
     render json: @assets
   end
