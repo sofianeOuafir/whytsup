@@ -14,10 +14,6 @@ class AuthenticationController < ApplicationController
   end
 
   def auto_login
-    if current_user
-      render json: current_user
-    else
-      render json: { error: "No user logged in" }, status: :unauthorized
-    end
+    render json: current_user
   end
  end

@@ -1,9 +1,14 @@
 class FollowingsController < ApplicationController
   before_action :set_following, only: [:destroy]
+  skip_before_action :authenticate_request, only: :index
 
   # GET /followings
   def index
-    @followings = current_user.assets
+    @followings = if current_user.present? 
+      current_user.assets
+    else
+      []
+    end 
 
     render json: @followings
   end
