@@ -11,6 +11,7 @@ class ApplicationController < ActionController::API
 
   def current_user
     puts "cookie: #{cookies.signed[:jwt]}" 
+    puts "result #{AuthorizeApiRequest.call(cookies.signed[:jwt]).result}"
     @current_user ||= AuthorizeApiRequest.call(cookies.signed[:jwt]).result
   end
 end
