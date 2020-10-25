@@ -6,7 +6,7 @@ class AuthenticationController < ApplicationController
  
     if command.success?
       token = command.result[:token]
-      cookies.signed[:jwt] = { value: token, httponly: true }
+      cookies.signed[:jwt] = { value: token, httponly: true, domain: 'www.buyingforselling.com' }
       render json: { auth_token: token, user: command.result[:user] }
     else
       render json: { error: command.errors }, status: :unauthorized
